@@ -65,12 +65,12 @@ export type PayloadTypeKeys = typeof PayloadTypes[keyof typeof PayloadTypes];
 export const PAYLOAD_CONFIGS: Record<PayloadTypeKeys, PayloadConfig> = {
   [PayloadTypes.BUBU_LEAVE]: {
     key: PayloadTypes.BUBU_LEAVE,
-    displayName: 'Bubu Leave',
+    displayName: 'Bubu',
     payload: payloadBubuLeave,
   },
   [PayloadTypes.BIBI_LEAVE]: {
     key: PayloadTypes.BIBI_LEAVE,
-    displayName: 'Bibi Leave',
+    displayName: 'Bibi',
     payload: payloadBibiLeave,
   },
 };
