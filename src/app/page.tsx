@@ -37,9 +37,10 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center px-8 py-8 justify-between bg-white dark:bg-black">
-        <DepartureList departures={departures} />
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center px-8 py-8 bg-white dark:bg-black">
         <DepartureTypeDropdown value={departureType} onChange={setDepartureType} />
+        <hr className="my-4 w-full border-zinc-200 dark:border-zinc-800" />
+        <DepartureList departures={departures} />
       </main>
     </div>
   );
