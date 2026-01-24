@@ -5,7 +5,7 @@ interface DepartureListProps {
 }
 
 export default function DepartureList({ departures }: DepartureListProps) {
-  
+
   const getDepartureTime = (offsetMinutes: number) => {
     const [hours, minutes] = departures.time.time.split(':').map(Number);
     const currentTime = new Date();
@@ -17,6 +17,10 @@ export default function DepartureList({ departures }: DepartureListProps) {
   const hasRealtime = (departure: typeof departures.departures[0]) => {
     return departure.attributes?.some(attr => attr.types.includes('REALTIME')) ?? false;
   };
+
+  if (!departures.departures || departures.departures.length === 0) {
+    return <div>Keine Abfahrten innerhalb der nächsten Stunden.</div>;
+  }
 
   return (
     <ul className="w-full space-y-2">
