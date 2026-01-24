@@ -1,3 +1,5 @@
+import { payloadBubuLeave, payloadBibiLeave } from './payload';
+
 export interface HVVTime {
   date: string;
   time: string;
@@ -46,3 +48,29 @@ export interface DeparturesResponse {
   time: HVVTime;
   departures: Departure[];
 }
+
+export interface PayloadConfig {
+  key: string;
+  displayName: string;
+  payload: unknown;
+}
+
+export const PayloadTypes = {
+  BUBU_LEAVE: 'BUBU_LEAVE',
+  BIBI_LEAVE: 'BIBI_LEAVE',
+} as const;
+
+export type PayloadTypeKeys = typeof PayloadTypes[keyof typeof PayloadTypes];
+
+export const PAYLOAD_CONFIGS: Record<PayloadTypeKeys, PayloadConfig> = {
+  [PayloadTypes.BUBU_LEAVE]: {
+    key: PayloadTypes.BUBU_LEAVE,
+    displayName: 'Bubu Leave',
+    payload: payloadBubuLeave,
+  },
+  [PayloadTypes.BIBI_LEAVE]: {
+    key: PayloadTypes.BIBI_LEAVE,
+    displayName: 'Bibi Leave',
+    payload: payloadBibiLeave,
+  },
+};

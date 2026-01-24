@@ -5,36 +5,15 @@ const HVV_BASE_URL = 'http://gti.geofox.de/gti/public/';
 const HVV_API_USER = process.env.HVV_API_USER || '';
 const HVV_API_KEY = process.env.HVV_API_KEY || '';
 
-const standardPayload = {
-  version: 47,
-  stations: [
-    { name: 'Moltrechtweg', id: 'Master:90018', city: 'Hamburg', type: 'STATION' },
-    { name: 'Suhrenkamp', id: 'Master:91031', city: 'Hamburg', type: 'STATION' }
-  ],
-  filter: [
-    { serviceID: 'HHA-B:23_HHA-B', stationIDs: ['Master:90031'] },
-    { serviceID: 'HHA-B:28_HHA-B', stationIDs: ['Master:90031'] },
-    { serviceID: 'HHA-B:174_HHA-B', stationIDs: ['Master:90038'] },
-    { serviceID: 'HHA-B:218_HHA-B', stationIDs: ['Master:90030'] }
-  ],
-  time: { time: 'jetzt' },
-  maxList: 15,
-  allStationsInChangingNode: 'true',
-  maxTimeOffset: 200,
-  useRealtime: 'true'
-};
-
 function getSignature(requestBody: unknown, secretKey: string): string {
   const hmac = crypto.createHmac('sha1', secretKey);
   hmac.update(JSON.stringify(requestBody));
   return hmac.digest('base64');
 }
 
-export async function getDepartures(): Promise<DeparturesResponse> {
+export async function getDepartures(payload: unknown): Promise<DeparturesResponse> {
   const service = 'departureList';
   const url = HVV_BASE_URL + service;
-  
-  const payload = { ...standardPayload };
   const signature = getSignature(payload, HVV_API_KEY);
 
   const headers = {

@@ -5,6 +5,7 @@ interface DepartureListProps {
 }
 
 export default function DepartureList({ departures }: DepartureListProps) {
+  
   const getDepartureTime = (offsetMinutes: number) => {
     const [hours, minutes] = departures.time.time.split(':').map(Number);
     const currentTime = new Date();
