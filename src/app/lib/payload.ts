@@ -8,7 +8,6 @@ export const payloadBubuLeave = {
   filter: [
     { serviceID: 'HHA-B:23_HHA-B', stationIDs: ['Master:90031'] },
     { serviceID: 'HHA-B:28_HHA-B', stationIDs: ['Master:90031'] },
-    { serviceID: 'HHA-B:174_HHA-B', stationIDs: ['Master:90038'] },
     { serviceID: 'HHA-B:218_HHA-B', stationIDs: ['Master:90030'] }
   ],
   time: { time: 'jetzt' },
