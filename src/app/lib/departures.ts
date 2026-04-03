@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import type { DeparturesResponse } from './types';
 
-const HVV_BASE_URL = 'http://gti.geofox.de/gti/public/';
+const HVV_BASE_URL = 'https://gti.geofox.de/gti/public/';
 const HVV_API_USER = process.env.HVV_API_USER || '';
 const HVV_API_KEY = process.env.HVV_API_KEY || '';
 
@@ -21,9 +21,7 @@ export async function getDepartures(payload: unknown): Promise<DeparturesRespons
     'Content-Type': 'application/json;charset=UTF-8',
     'geofox-auth-type': 'HmacSHA1',
     'geofox-auth-user': HVV_API_USER,
-    'geofox-auth-signature': signature,
-    'Host': 'gti.geofox.de',
-    'Connection': 'Keep-Alive'
+    'geofox-auth-signature': signature
   };
 
   const response = await fetch(url, {
@@ -34,6 +32,8 @@ export async function getDepartures(payload: unknown): Promise<DeparturesRespons
   });
 
   if (!response.ok) {
+    const errorBody = await response.text();
+    console.error('Failed to fetch departures:', response.status, response.statusText, errorBody);
     throw new Error('Failed to fetch departures');
   }
 

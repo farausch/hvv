@@ -11,7 +11,7 @@ export const payloadBubuLeave = {
     { serviceID: 'HHA-B:218_HHA-B', stationIDs: ['Master:90030'] }
   ],
   time: { time: 'jetzt' },
-  maxList: 15,
+  maxList: 10,
   allStationsInChangingNode: 'true',
   maxTimeOffset: 200,
   useRealtime: 'true'
