@@ -31,3 +31,16 @@ export const payloadBibiLeave = {
   maxTimeOffset: 200,
   useRealtime: 'true'
 }
+
+export const payloadBubuConstruction = {
+  version: 47,
+  station: { id: "Master:90000", name: "Alsterkrugchaussee (Mitte)", type: "STATION" },
+  filter: [
+    { serviceID: 'HHA-B:28_HHA-B', stationIDs: ['Master:90031'] },
+  ],
+  time: { time: 'jetzt' },
+  maxList: 5,
+  allStationsInChangingNode: 'true',
+  maxTimeOffset: 200,
+  useRealtime: 'true'
+};

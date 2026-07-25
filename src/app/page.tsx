@@ -15,6 +15,7 @@ export default function Home() {
       try {
         const response = await fetch(`/api/departures?type=${departureType}`);
         const data = await response.json();
+        console.log('Fetched departures:', data);
         setDepartures(data);
       } catch (error) {
         console.error('Error fetching departures:', error);
