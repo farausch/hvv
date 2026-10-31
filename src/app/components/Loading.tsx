@@ -12,7 +12,7 @@ export default function Loading() {
           <div className="absolute inset-0 m-auto size-2 rounded-full bg-indigo-500 motion-safe:animate-pulse dark:bg-indigo-400" />
         </div>
         <p className="text-sm font-medium tracking-wide text-zinc-600 dark:text-zinc-300">
-          Finding your next departure
+          Bibi Express wird geladen...
         </p>
       </div>
     </div>
