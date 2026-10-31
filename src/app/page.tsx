@@ -5,6 +5,7 @@ import type { DeparturesResponse, PayloadTypeKeys } from './lib/types';
 import { PayloadTypes } from './lib/types';
 import DepartureList from './components/DepartureList';
 import DepartureTypeDropdown from './components/DepartureTypeDropdown';
+import Loading from './components/Loading';
 
 export default function Home() {
   const [departures, setDepartures] = useState<DeparturesResponse | null>(null);
@@ -28,11 +29,7 @@ export default function Home() {
   }, [departureType]);
 
   if (!departures) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-        <div>Loading...</div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
