@@ -7,11 +7,41 @@ import DepartureList from './components/DepartureList';
 import DepartureTypeDropdown from './components/DepartureTypeDropdown';
 import Loading from './components/Loading';
 
+const DEPARTURE_TYPE_STORAGE_KEY = 'departureType';
+const isPayloadType = (value: string | null): value is PayloadTypeKeys =>
+  Object.values(PayloadTypes).some((payloadType) => payloadType === value);
+
 export default function Home() {
   const [departures, setDepartures] = useState<DeparturesResponse | null>(null);
   const [departureType, setDepartureType] = useState<PayloadTypeKeys>(PayloadTypes.BIBI_LEAVE);
+  const [isPreferenceLoaded, setIsPreferenceLoaded] = useState(false);
 
   useEffect(() => {
+    try {
+      const savedDepartureType = localStorage.getItem(DEPARTURE_TYPE_STORAGE_KEY);
+      if (isPayloadType(savedDepartureType)) {
+        setDepartureType(savedDepartureType);
+      }
+    } catch (error) {
+      console.error('Error reading saved departure type:', error);
+    }
+
+    setIsPreferenceLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isPreferenceLoaded) return;
+
+    try {
+      localStorage.setItem(DEPARTURE_TYPE_STORAGE_KEY, departureType);
+    } catch (error) {
+      console.error('Error saving departure type:', error);
+    }
+  }, [departureType, isPreferenceLoaded]);
+
+  useEffect(() => {
+    if (!isPreferenceLoaded) return;
+
     const fetchDepartures = async () => {
       try {
         const response = await fetch(`/api/departures?type=${departureType}`);
@@ -26,7 +56,7 @@ export default function Home() {
     const interval = setInterval(fetchDepartures, 20000);
 
     return () => clearInterval(interval);
-  }, [departureType]);
+  }, [departureType, isPreferenceLoaded]);
 
   if (!departures) {
     return <Loading />;
